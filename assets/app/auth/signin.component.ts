@@ -17,7 +17,7 @@ import {Router} from "angular2/router";
                     <label for="password">Password</label>
                     <input [ngFormControl]="myForm.find('password')" type="password" id="password" class="form-control">
                 </div>
-                <button type="submit" class="btn btn-primary" [disabled]="!myForm.valid">Sign Up</button>
+                <button type="submit" class="btn btn-primary" [disabled]="!myForm.valid">Sign In</button>
             </form>
         </section>
     `
