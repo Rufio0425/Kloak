@@ -9,3 +9,7 @@ This project was built so that I could understand the **MEAN** stack and also **
 ## Installation
 
 Installation is pretty simple. You can pull the project as usual through regular git in the command line. Once you have pulled the project, you can run a simple **'npm install'** command in the **root** directory to download all of the dependencies
+
+## Contributors
+
+Sean Aguirre
