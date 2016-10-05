@@ -8,6 +8,7 @@ var User = require('../models/user');
 router.get('/', function(req, res, next) {
 	// 'exec' means don't execute 'find' immediately, this helps with combined queries
 	Message.find()
+		.populate('user', 'firstName')
 		.exec(function(err, docs) {
 			if (err) {
 				return res.status(404).json({
@@ -26,7 +27,7 @@ router.get('/', function(req, res, next) {
 router.use('/', function(req, res, next) {
 	jsonWebToken.verify(req.query.token, 'secret', function(err, decoded) {
 		if (err) {
-			return res.status(404).json({
+			return res.status(401).json({
 				title: 'Authentication failed',
 				error: err
 			});
@@ -67,6 +68,7 @@ router.post('/', function(req, res, next) {
 
 // patch updates parts of a resource or data on a server
 router.patch('/:id', function(req, res, next) {
+	var decoded = jsonWebToken.decode(req.query.token);
 	Message.findById(req.params.id, function(err, doc) {
 		if (err) {
 			return res.status(404).json({
@@ -78,6 +80,12 @@ router.patch('/:id', function(req, res, next) {
 			return res.status(404).json({
 				title: 'No message found',
 				error: {message: 'Message could not be found'}
+			});
+		}
+		if (doc.user != decoded.user._id) {
+			return res.status(401).json({
+				title: 'Not Authorized',
+				error: {message: 'Message created by other user'}
 			});
 		}
 		doc.content = req.body.content;
@@ -98,6 +106,7 @@ router.patch('/:id', function(req, res, next) {
 });
 
 router.delete('/:id', function(req, res, next) {
+	var decoded = jsonWebToken.decode(req.query.token);
 	Message.findById(req.params.id, function(err, doc) {
 		if (err) {
 			return res.status(404).json({
@@ -109,6 +118,12 @@ router.delete('/:id', function(req, res, next) {
 			return res.status(404).json({
 				title: 'No message found',
 				error: {message: 'Message could not be found'}
+			});
+		}
+		if (doc.user != decoded.user._id) {
+			return res.status(401).json({
+				title: 'Not Authorized',
+				error: {message: 'Message created by other user'}
 			});
 		}
 		doc.remove(function(err, result) {
