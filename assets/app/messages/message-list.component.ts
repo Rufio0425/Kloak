@@ -2,6 +2,7 @@ import {Component, OnInit} from "angular2/core";
 import {MessageComponent} from "./message.component";
 import {Message} from "./message";
 import {MessageService} from "./message.service";
+import {ErrorService} from "../errors/error.service";
 @Component({
     selector: 'my-message-list',
     template: `
@@ -13,7 +14,7 @@ import {MessageService} from "./message.service";
 })
 export class MessageListComponent implements OnInit {
 
-    constructor(private _messageService: MessageService) {}
+    constructor(private _messageService: MessageService, private _errorService: ErrorService) {}
 
     messages: Message[];
 
@@ -23,7 +24,8 @@ export class MessageListComponent implements OnInit {
                 messages => {
                     this.messages = messages;
                     this._messageService.messages = messages;
-                }
+                },
+                error => this._errorService.handleError(error)
             );
     }
 }
