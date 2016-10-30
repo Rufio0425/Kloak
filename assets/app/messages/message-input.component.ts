@@ -11,10 +11,8 @@ import {ErrorService} from "../errors/error.service";
                     <label for="content">Content</label>
                     <input ngControl="content" type="text" class="form-control" id="content" #input [ngModel]="message?.content">
                 </div>
-                <div *ngIf="publicHelpText">Public Help Text</div>
-                <button on-mouseover='publicHelp()' on-mouseleave='exitHelp()' type="submit" class="btn btn-primary">{{ !message ? 'Post Publicly' : 'Save Message' }}</button>
-                <button on-mouseover='privateHelp()' on-mouseleave='exitHelp()' type="submit" class="btn btn-primary">Post Anonymously</button>
-                <div *ngIf="privateHelpText">Private Help Text</div>
+                <button title="Public Help Text" trigger="hover" type="submit" class="btn btn-primary">{{ !message ? 'Post Publicly' : 'Save Message' }}</button>
+                <button title="Private Help Text" trigger="hover" type="submit" class="btn btn-primary">Post Anonymously</button>
                 <button type="button" class="btn btn-danger" (click)="onCancel()" *ngIf="message">Cancel</button>
             </form>
         </section>
@@ -22,12 +20,7 @@ import {ErrorService} from "../errors/error.service";
 })
 export class MessageInputComponent implements OnInit{
     message:Message = null;
-    publicHelpText = false;
-    privateHelpText = false;
-    constructor(private _messageService:MessageService, private _errorService: ErrorService) {
-        console.log(`publicHelpText is::: ${this.publicHelpText}`);
-        console.log(`privateHelpText is::: ${this.privateHelpText}`);
-    }
+    constructor(private _messageService:MessageService, private _errorService: ErrorService) {}
 
     onSubmit(form:any) {
         if (this.message) {
@@ -50,24 +43,6 @@ export class MessageInputComponent implements OnInit{
                     error => this._errorService.handleError(error)
                 );
         }
-    }
-
-    publicHelp() {
-        this.publicHelpText = true;
-        console.log(`publicHelpText is::: ${this.publicHelpText}`);
-
-    }
-
-    privateHelp() {
-        this.privateHelpText = true;
-        console.log(`privateHelpText is::: ${this.privateHelpText}`);
-    }
-
-    exitHelp() {
-        this.publicHelpText = false;
-        this.privateHelpText = false;
-        console.log(`publicHelpText is::: ${this.publicHelpText}`);
-        console.log(`privateHelpText is::: ${this.privateHelpText}`);
     }
 
     onCancel() {
