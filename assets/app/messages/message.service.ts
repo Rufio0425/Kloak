@@ -14,6 +14,7 @@ export class MessageService {
 
     addMessage(message: Message) {
         const body = JSON.stringify(message);
+        console.log('body is::: ' +JSON.stringify(body));
         const headers = new Headers({'Content-Type': 'application/json'});
         const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
         // Here were are returning the Observable.
@@ -21,7 +22,9 @@ export class MessageService {
         return this._http.post('http://localhost:3000/message' + token, body, {headers: headers})
             .map(response => {
                 const data = response.json().obj;
-                let message = new Message(data.content, data._id, data.user.firstName, data.user._id);
+                console.log(response.json());
+                console.log('data is::: ' +JSON.stringify(data));
+                let message = new Message(data.content, data._id, data.user.firstName, data.user._id, data.anonymous);
                 return message;
             })
             .catch(error => Observable.throw(error.json()));

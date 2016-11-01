@@ -37,6 +37,7 @@ router.use('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
+	console.log('Hello');
 	var decoded = jsonWebToken.decode(req.query.token);
 	User.findById(decoded.user._id, function(err, doc) {
 		if (err) {
@@ -47,6 +48,7 @@ router.post('/', function(req, res, next) {
 		}
 		var message = new Message({
 			content: req.body.content,
+			anonymous: req.body.anonymous,
 			user: doc
 		});
 		message.save(function(err, result) {
@@ -59,7 +61,7 @@ router.post('/', function(req, res, next) {
 			doc.messages.push(result);
 			doc.save();
 			res.status(201).json({
-				message: 'Saved message',
+				message: 'Saved messages forever',
 				obj: result
 			});
 		});

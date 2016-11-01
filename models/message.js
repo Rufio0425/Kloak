@@ -4,6 +4,7 @@ var User = require('../models/user');
 
 var schema = new Schema({
     content: {type: String, required: true},
+    anonymous: {type: Boolean, require: true},
     user: {type: Schema.Types.ObjectId, ref: 'User'}
 });
 
