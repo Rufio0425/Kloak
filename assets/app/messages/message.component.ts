@@ -10,8 +10,11 @@ import {ErrorService} from "../errors/error.service";
                 {{ message.content }}
             </div>
             <footer class="panel-footer">
-                <div class="author">
+                <div *ngIf="!message.anonymous" class="author">
                     {{ message.username }}
+                </div>
+                <div *ngIf="message.anonymous" class="author">
+                    Anonymous
                 </div>
                 <div class="config" *ngIf="belongsToUser()">
                     <a (click)="onEdit()">Edit</a>

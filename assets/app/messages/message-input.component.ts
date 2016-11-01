@@ -10,10 +10,9 @@ import {ErrorService} from "../errors/error.service";
                 <div class="form-group">
                     <label for="content">Content</label>
                     <input ngControl="content" type="text" class="form-control" id="content" #input [ngModel]="message?.content">
-                    <input ngControl="anonymous" type="boolean" class="form-control" id="anonymous" [ngModel]="message?.anonymous">
                 </div>
-                <button title="Public Help Text" trigger="hover" type="submit" class="btn btn-primary">{{ !message ? 'Post Publicly' : 'Save Message' }}</button>
-                <button title="Private Help Text" trigger="hover" type="submit" class="btn btn-primary">Post Anonymously</button>
+                <button title="Public Help Text" trigger="hover" type="submit" (click)="anonymousPost(false)" class="btn btn-primary">{{ !message ? 'Post Publicly' : 'Save Message' }}</button>
+                <button title="Private Help Text" trigger="hover" type="submit" (click)="anonymousPost(true)" class="btn btn-primary">Post Anonymously</button>
                 <button type="button" class="btn btn-danger" (click)="onCancel()" *ngIf="message">Cancel</button>
             </form>
         </section>
@@ -21,7 +20,12 @@ import {ErrorService} from "../errors/error.service";
 })
 export class MessageInputComponent implements OnInit{
     message:Message = null;
+    anonymous = false;
     constructor(private _messageService:MessageService, private _errorService: ErrorService) {}
+
+    anonymousPost(anonymous) {
+        this.anonymous = anonymous;
+    }
 
     onSubmit(form:any) {
         if (this.message) {
@@ -34,7 +38,8 @@ export class MessageInputComponent implements OnInit{
                 );
             this.message = null;
         } else {
-            const message:Message = new Message(form.content, null, 'Dummy', null, form.anonymous);
+            console.log('anon in else is::: ' +this.anonymous);
+            const message:Message = new Message(form.content, null, 'Dummy', null, this.anonymous);
             console.log('message is::: ' + JSON.stringify(message));
             this._messageService.addMessage(message)
                 .subscribe(
