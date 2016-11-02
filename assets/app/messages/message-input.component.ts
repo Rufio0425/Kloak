@@ -9,18 +9,30 @@ import {ErrorService} from "../errors/error.service";
             <form (ngSubmit)="onSubmit(f.value)" #f="ngForm">
                 <div class="form-group">
                     <label for="content">Content</label>
-                    <input ngControl="content" type="text" class="form-control" id="content" #input [ngModel]="message?.content">
+                    <textarea [class.my-class]="!isWriting" (focus)="isWriting = !isWriting" (focusout)="isWriting = !isWriting" placeholder="Got something to say?" ngControl="content" type="text" class="form-control" id="content" #input [ngModel]="message?.content"></textarea>
                 </div>
                 <button title="Public Help Text" trigger="hover" type="submit" (click)="anonymousPost(false)" class="btn btn-primary">{{ !message ? 'Post Publicly' : 'Save Message' }}</button>
                 <button title="Private Help Text" trigger="hover" type="submit" (click)="anonymousPost(true)" class="btn btn-primary">Post Anonymously</button>
                 <button type="button" class="btn btn-danger" (click)="onCancel()" *ngIf="message">Cancel</button>
             </form>
         </section>
-    `
+    `,
+    styles: [
+      `
+          .my-class {
+              height: 34px;
+          }
+
+          textarea {
+              resize: none;
+          }
+      `
+  ]
 })
 export class MessageInputComponent implements OnInit{
     message:Message = null;
     anonymous = false;
+    isWriting = false;
     constructor(private _messageService:MessageService, private _errorService: ErrorService) {}
 
     anonymousPost(anonymous) {
