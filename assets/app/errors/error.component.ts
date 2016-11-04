@@ -13,7 +13,8 @@ import {ErrorService} from "./error.service";
 						<h4 class="modal-title">{{errorData?.title}}</h4>
 					</div>
 					<div class="modal-body">
-						<p>{{errorData?.message}}</p>
+						<p *ngIf="errorData?.message != 'jwt expired'">{{errorData?.message}}</p>
+						<p *ngIf="errorData?.message == 'jwt expired'">Oh no! I looks like your session is expired! Please log in to continue.</p>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" (click)="onErrorHandled()">Close</button>
