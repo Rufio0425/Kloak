@@ -1,4 +1,4 @@
-## MessagesService
+## Kloak
 
 This is an application that I have created to learn and interact more with the **MEAN** stack. This application uses Angular2, Node.js, Mongo and Mongoose(to handle database calls and set up models). At times, handlebars is used to act as a template for the front-end
 
