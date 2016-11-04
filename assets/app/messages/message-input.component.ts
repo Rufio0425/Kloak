@@ -12,7 +12,7 @@ import {ErrorService} from "../errors/error.service";
                     <textarea [class.focused]="!isWriting" (focus)="isWriting = !isWriting" (focusout)="isWriting = !isWriting" placeholder="Got something to say?" ngControl="content" type="text" class="form-control" id="content" #input [ngModel]="message?.content"></textarea>
                 </div>
                 <button title="Public Help Text" trigger="hover" type="submit" (click)="anonymousPost(false)" class="btn btn-primary">{{ !message ? 'Post Publicly' : 'Save Message' }}</button>
-                <button title="Private Help Text" trigger="hover" type="submit" (click)="anonymousPost(true)" class="btn btn-primary">Post Anonymously</button>
+                <button *ngIf="!message" title="Private Help Text" trigger="hover" type="submit" (click)="anonymousPost(true)" class="btn btn-primary">Post Anonymously</button>
                 <button type="button" class="btn btn-danger" (click)="onCancel()" *ngIf="message">Cancel</button>
             </form>
         </section>
