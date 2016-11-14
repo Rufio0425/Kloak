@@ -11,8 +11,8 @@ import {ErrorService} from "../errors/error.service";
                     <label for="content">Kloak</label>
                     <textarea [class.focused]="!isWriting" (focus)="isWriting = !isWriting" (focusout)="isWriting = !isWriting" placeholder="Got something to say?" ngControl="content" type="text" class="form-control" id="content" #input [ngModel]="message?.content"></textarea>
                 </div>
-                <button title="Public Help Text" trigger="hover" type="submit" (click)="anonymousPost(false)" class="btn btn-primary">{{ !message ? 'Post Publicly' : 'Save Message' }}</button>
-                <button *ngIf="!message" title="Private Help Text" trigger="hover" type="submit" (click)="anonymousPost(true)" class="btn btn-primary">Post Anonymously</button>
+                <button title="This will only post your first name as the author of the post" trigger="hover" type="submit" (click)="anonymousPost(false)" class="btn btn-primary">{{ !message ? 'Post Publicly' : 'Save Message' }}</button>
+                <button *ngIf="!message" title="This will post your message anonymously, have at it!" trigger="hover" type="submit" (click)="anonymousPost(true)" class="btn btn-primary">Post Anonymously</button>
                 <button type="button" class="btn btn-danger" (click)="onCancel()" *ngIf="message">Cancel</button>
             </form>
         </section>

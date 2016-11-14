@@ -1,9 +1,6 @@
 body {
-	background: url("../images/disguise.png") no-repeat center center fixed;
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-	background-size: cover;
+	background: url("../images/kLoak.png") no-repeat fixed;
+	background-position: left bottom;
 	padding: 50px;
 	font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }

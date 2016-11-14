@@ -6,7 +6,7 @@ import {ErrorService} from "../errors/error.service";
     selector: 'my-message',
     template: `
         <article class="panel panel-default">
-            <div class="panel-body">
+            <div class="panel-body" [class.belongsToUser]="belongsToUser()">
                 {{ message.content }}
             </div>
             <footer class="panel-footer">
@@ -35,6 +35,9 @@ import {ErrorService} from "../errors/error.service";
             text-align: right;
             font-size: 12px;
             width: 19%;
+        }
+        .belongsToUser {
+            background-color: #ABABAB;
         }
     `]
 })
