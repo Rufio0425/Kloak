@@ -8,7 +8,6 @@ import {ErrorService} from "../errors/error.service";
         <section class="col-md-8 col-md-offset-2">
             <form (ngSubmit)="onSubmit(f.value)" #f="ngForm">
                 <div class="form-group">
-                    <label for="content">Kloak</label>
                     <textarea [class.focused]="!isWriting" (focus)="isWriting = !isWriting" (focusout)="isWriting = !isWriting" placeholder="Got something to say?" ngControl="content" type="text" class="form-control" id="content" #input [ngModel]="message?.content"></textarea>
                 </div>
                 <button title="This will only post your first name as the author of the post" trigger="hover" type="submit" (click)="anonymousPost(false)" class="btn btn-primary">{{ !message ? 'Post Publicly' : 'Save Message' }}</button>

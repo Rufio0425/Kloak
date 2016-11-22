@@ -1,19 +1,23 @@
 body {
-	background: url("../images/kLoak.png") no-repeat fixed;
-	background-position: left bottom;
+	background: url("../images/kloak.png") no-repeat fixed;
+	background-size: 200px;
+	background-position:3% 97%;
 	padding: 50px;
 	font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
-  color: #00B7FF;
   cursor: pointer;
 }
 
 a:hover,
-a:active {
-  color: #00B7FF;
-  text-decoration: underline;
+a:active,
+.buttonHeader:hover,
+.buttonHeader:active,
+.btn-primary:hover,
+.btn-primary:active {
+  background-color: #f2a4c8;
+  color:white;
 }
 
 a.danger {
@@ -26,4 +30,10 @@ a.danger {
 
 .ng-invalid.ng-touched {
   border: 1px solid red;
+}
+
+.buttonHeader,
+.btn-primary {
+	background-color: #f21f84;
+	border: none;
 }

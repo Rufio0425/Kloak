@@ -6,8 +6,8 @@ import {ROUTER_DIRECTIVES} from "angular2/router";
         <header class="row">
             <nav class="col-md-8 col-md-offset-2">
                 <ul class="nav nav-pills">
-                    <li><a [routerLink]="['Messages']">Messages</a></li>
-                    <li><a [routerLink]="['Auth']">Authentication</a></li>
+                    <li><a [routerLink]="['Messages']" class="buttonHeader">Messages</a></li>
+                    <li><a [routerLink]="['Auth']" class="buttonHeader">Authentication</a></li>
                 </ul>
             </nav>
         </header>
@@ -19,7 +19,7 @@ import {ROUTER_DIRECTIVES} from "angular2/router";
         }
     
         ul {
-          text-align: center;  
+          text-align: center;
         }
         
         li {
@@ -27,9 +27,8 @@ import {ROUTER_DIRECTIVES} from "angular2/router";
             display: inline-block;
         }
         
-        .router-link-active {
-            background-color: #337ab7;
-            color: white;
+        a {
+            color:white;
         }
     `]
 })
